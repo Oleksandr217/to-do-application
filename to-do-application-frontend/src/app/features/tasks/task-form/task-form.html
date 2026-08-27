@@ -1,0 +1,50 @@
+<div>
+  <div class="card p-4 shadow" style="width: 450px">
+    <h5 class="mb-3">{{ isEditMode ? 'Редагувати задачу' : 'Нова задача' }}</h5>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="mb-2">
+        <label class="form-label">Назва</label>
+        <input type="text" class="form-control" formControlName="title" />
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">Опис</label>
+        <textarea class="form-control" formControlName="description" rows="2"></textarea>
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">Пріоритет</label>
+        <select class="form-select" formControlName="priority">
+          <option value="Low">Низький</option>
+          <option value="Medium">Середній</option>
+          <option value="High">Високий</option>
+        </select>
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">Дедлайн</label>
+        <input type="date" class="form-control" formControlName="dueDate" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Категорія</label>
+        <select class="form-select" formControlName="categoryId">
+          <option value="">Без категорії</option>
+          <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+        </select>
+      </div>
+
+      <div class="alert alert-danger py-2" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+      <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary flex-fill" [disabled]="form.invalid">
+          Зберегти
+        </button>
+        <button type="button" class="btn btn-secondary flex-fill" (click)="onCancel()">
+          Скасувати
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

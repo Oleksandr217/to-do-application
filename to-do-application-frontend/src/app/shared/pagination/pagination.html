@@ -1,0 +1,15 @@
+<nav *ngIf="totalPages > 1">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <button class="page-link" (click)="goToPage(currentPage - 1)">Назад</button>
+    </li>
+
+    <li class="page-item" *ngFor="let p of pages" [class.active]="currentPage === p">
+      <button class="page-link" (click)="goToPage(p)">{{ p }}</button>
+    </li>
+
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <button class="page-link" (click)="goToPage(currentPage + 1)">Вперед</button>
+    </li>
+  </ul>
+</nav>

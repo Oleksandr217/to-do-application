@@ -1,0 +1,68 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Мої задачі</h2>
+    <div>
+      <button class="btn btn-outline-secondary me-2" (click)="goToCategories()">Категорії</button>
+      <button class="btn btn-outline-danger" (click)="logout()">Вийти</button>
+    </div>
+  </div>
+
+  <div class="row mb-3 g-2">
+    <div class="col-md-4">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Пошук за назвою чи описом..."
+        (input)="onSearchChange($any($event.target).value)"
+      />
+    </div>
+
+    <div class="col-md-4">
+      <select class="form-select" (change)="onCategoryFilterChange($any($event.target).value)">
+        <option value="">Усі категорії</option>
+        <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <select class="form-select" (change)="onCompletedFilterChange($any($event.target).value)">
+        <option value="">Усі задачі</option>
+        <option value="false">Невиконані</option>
+        <option value="true">Виконані</option>
+      </select>
+    </div>
+  </div>
+
+  <button class="btn btn-primary mb-3" (click)="openCreateForm()">+ Нова задача</button>
+
+  <div *ngIf="isLoading" class="text-center py-4">Завантаження...</div>
+
+  <div *ngIf="!isLoading && tasks.length === 0" class="text-muted text-center py-4">
+    Задач не знайдено
+  </div>
+
+  <app-task-item
+    *ngFor="let task of tasks"
+    [task]="task"
+    (edit)="openEditForm($event)"
+    (delete)="onDeleteTask($event)"
+    (toggleCompleted)="onToggleCompleted($event)"
+  >
+  </app-task-item>
+
+  <app-pagination
+    [currentPage]="query.pageNumber ?? 1"
+    [totalPages]="totalPages"
+    (pageChanged)="goToPage($event)"
+  >
+  </app-pagination>
+
+  <app-task-form
+    *ngIf="showForm"
+    [task]="editingTask"
+    [categories]="categories"
+    (saved)="onFormSaved()"
+    (cancelled)="closeForm()"
+  >
+  </app-task-form>
+</div>

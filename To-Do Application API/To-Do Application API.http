@@ -1,0 +1,49 @@
+@ToDoApp_HostAddress = http://localhost:5051
+
+### Реєстрація
+POST {{ToDoApp_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Ivan",
+  "email": "ivan@test.com",
+  "password": "123456"
+}
+
+### Логін
+POST {{ToDoApp_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "ivan@test.com",
+  "password": "123456"
+}
+
+### Отримати всі категорії (потрібен токен)
+GET {{ToDoApp_HostAddress}}/api/categories
+Authorization: Bearer ВСТАВТЕ_СЮДИ_ТОКЕН
+
+### Створити категорію
+POST {{ToDoApp_HostAddress}}/api/categories
+Authorization: Bearer ВСТАВТЕ_СЮДИ_ТОКЕН
+Content-Type: application/json
+
+{
+  "name": "Робота"
+}
+
+### Отримати задачі з пагінацією
+GET {{ToDoApp_HostAddress}}/api/tasks?pageNumber=1&pageSize=10
+Authorization: Bearer ВСТАВТЕ_СЮДИ_ТОКЕН
+
+### Створити задачу
+POST {{ToDoApp_HostAddress}}/api/tasks
+Authorization: Bearer ВСТАВТЕ_СЮДИ_ТОКЕН
+Content-Type: application/json
+
+{
+  "title": "Написати звіт",
+  "description": "Звіт з практики",
+  "priority": "High",
+  "dueDate": "2026-09-01"
+}
