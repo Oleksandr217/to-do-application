@@ -1,27 +1,27 @@
 # To-Do Application
 
-## Технології
+## Technology
 
 Backend: ASP.NET Core 9, EF Core, PostgreSQL, JWT
 Frontend: Angular 22, Bootstrap 5
 
-## Запуск (Docker)
+## Project Launch (Docker)
 
-Вимоги: встановлений Docker Desktop
+Requirements: Docker Desktop must be installed
 
     docker compose up --build
 
-Після завершення збірки:
+After assembly is complete:
 
-- Застосунок: http://localhost:4200
+- App: http://localhost:4200
 - Swagger: http://localhost:5051/swagger
 
-Зареєструйте нового користувача через сторінку /register, щоб почати роботу.
+Register a new user to get started.
 
-Зупинити застосунок:
+Stop the app:
 
     docker compose down
 
-Зупинити і видалити дані БД:
+Stop and delete database data:
 
     docker compose down -v
